@@ -6,6 +6,7 @@ public class Grid {
     private Piece[][] grid;
     private final int DEFAULT_SIZE=8;
 
+    //Constructors
     public Grid(){
         grid=new Piece[DEFAULT_SIZE][DEFAULT_SIZE];
 
