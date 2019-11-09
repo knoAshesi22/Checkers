@@ -1,8 +1,5 @@
 package Checkers;
 
-/*
-Testingsss
- */
 
 public class Grid {
 
