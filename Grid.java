@@ -55,18 +55,21 @@ public class Grid {
             }
     }
 
-    public int[][] genMoves(int[] cell){
-        /*
-        /Generates a list of possible moves from a given tile
-        /Conditions for method:
-        /1. Should only work for occupied tiles
-        /2. Should only show valid moves,i.e., within the bounds of the grid
-        /3. Should account for the player the piece belongs to,i.e., R1 pawns move forward, R2 pawns move backward
-        /4. Should check if tile has a pawn or king.
-        /5. Should generate possible jumps
-         */
-        return new int[0][0];
+public int[][] genMoves(int[] cell){
+    /*
+    /Generates a list of possible moves from a given tile
+    /Conditions for method:
+    /1. Should only work for occupied tiles
+    /2. Should only show valid moves,i.e., within the bounds of the grid
+    /3. Should account for the player the piece belongs to,i.e., R1 pawns move forward, R2 pawns move backward
+    /4. Should check if tile has a pawn or king.
+    /5. Should generate possible jumps
+     */
+    if (Piece.getRole()==R1){
+        System.out.println("hbb jhek")
     }
+    return new int[0][0];
+}
 
 
     public boolean isOccupied(int x, int y){
