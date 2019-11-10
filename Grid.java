@@ -63,6 +63,7 @@ public class Grid {
         /2. Should only show valid moves,i.e., within the bounds of the grid
         /3. Should account for the player the piece belongs to,i.e., R1 pawns move forward, R2 pawns move backward
         /4. Should check if tile has a pawn or king.
+        /5. Should generate possible jumps
          */
         return new int[0][0];
     }
@@ -85,9 +86,27 @@ public class Grid {
         grid[dest[0]][dest[1]]=grid[origin[0]][origin[1]];
         grid[origin[0]][origin[1]]=null;
 
+        if(dest[0]==0||dest[0]==(grid.length-1)){
+            Piece piece=grid[dest[0]][dest[0]];
+            if(piece.getRank()== Piece.Rank.KING){
+                return;
+            }
+            if(piece.getRole()== Piece.Role.R1&&dest[0]==(grid.length-1)){
+                piece.promote();
+                return;
+            }
+            if(piece.getRole()== Piece.Role.R2&&dest[0]==(0)){
+                piece.promote();
+                return;
+            }
+
+        }
+
     }
 
-
+    public void remove(int[] coord){
+        grid[coord[0]][coord[1]]=null;
+    }
 
     public void printOccupied(){
         /*
