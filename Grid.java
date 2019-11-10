@@ -55,20 +55,41 @@ public class Grid {
             }
     }
 
-public int[][] genMoves(int[] cell){
-    /*
-    /Generates a list of possible moves from a given tile
-    /Conditions for method:
-    /1. Should only work for occupied tiles
-    /2. Should only show valid moves,i.e., within the bounds of the grid
-    /3. Should account for the player the piece belongs to,i.e., R1 pawns move forward, R2 pawns move backward
-    /4. Should check if tile has a pawn or king.
-    /5. Should generate possible jumps
-     */
-    if (Piece.getRole()==R1){
-        System.out.println("hbb jhek")
-    }
-    return new int[0][0];
+    public int[][] genMoves(int[] cell){
+        /*
+        /Generates a list of possible moves from a given tile
+        /Conditions for method:
+        /1. Should only work for occupied tiles
+        /2. Should only show valid moves,i.e., within the bounds of the grid
+        /3. Should account for the player the piece belongs to,i.e., R1 pawns move forward, R2 pawns move backward
+        /4. Should check if tile has a pawn or king.
+        /5. Should generate possible jumps
+         */
+        if (Grid.isOccupied()){
+            if (Piece.getRank() == PAWN){ 
+                if (Piece.getRole() == R1){ 
+                    if (grid[x+1][y+1]==null){ 
+                        grid[x+1][y+1] = grid[x][y]; // Player 1 moves right-up diagonal
+                        grid[x][y] = null; // original cell is emptied out
+                    }
+                    else if (grid[x-1][y+1] == null){
+                        grid[x-1][y+1] = grid[x][y]; // Player 1 moves left-up diagonal
+                        grid[x][y] = null;
+                    }
+                }
+                else if (Piece.getRole() == R2){
+                    if (grid[x+1][y-1] == null){
+                        grid[x+1][y-1] = grid[x][y]; // Player 1 moves right-down diagonal
+                        grid[x][y] = null;
+                    }
+                    else if (grid[x-1][y-1] == null){
+                        grid[x-1][y-1] = grid[x][y]; // Player 1 moves left-down diagonal
+                        grid[x][y] = null;
+                    } 
+                }
+            }
+        }
+        return new int[0][0];
 }
 
 
