@@ -111,7 +111,7 @@ public class Grid {
 		    else if(isInGrid(x+2,y+2) && !isOccupied(x+2,y+2)){
                         moveset.add(x+2,y+2); //add upper-right jump
                     }
-		    else if(isInGrid(x-1,y+1) && !isOccupied(x-1,y+1)){
+		    if(isInGrid(x-1,y+1) && !isOccupied(x-1,y+1)){
                         moveset.add(x-1,y+1); //add upper-left movement
                     }
 	
@@ -127,7 +127,7 @@ public class Grid {
 		    else if(isInGrid(x+2,y-2) && !isOccupied(x+2,y-2)){
                         moveset.add(x+2,y-2); //add lower-right jump
                     }
-                    else if (isInGrid(x-1,y-1) && !isOccupied(x-1,y-1)){
+                    if (isInGrid(x-1,y-1) && !isOccupied(x-1,y-1)){
                         moveset.add(x-1,y-1); // add lower-left movement
                     }
 		    else if(isInGrid(x-2,y-2) && !isOccupied(x-2,y-2)){
