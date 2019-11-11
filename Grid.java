@@ -71,40 +71,18 @@ public class Grid {
 
     public void setGrid(){
         int mid=grid.length/2;
-
+		int start;
         for (int i = 0; i < mid-1; i++) {
-            if(i%2==0){
-                for (int j = 0; j < grid.length; j++) {
-                    if (j % 2 == 1) {
-                        grid[i][j] = new Piece(Piece.Role.R1);
-                    }
-                }
-            }
-            else {
-                for (int j = 0; j < grid.length; j++) {
-                    if (j % 2 == 0) {
-                        grid[i][j] = new Piece(Piece.Role.R1);
-                    }
-                }
-            }
+        	if(i%2==0){
+        		start =1;
+        	}else {
+        		start=0;
+        	}
+        	for (int j = start; j <grid.length; j=j+2) {
+        			grid[i][j] = new Piece(Piece.Role.R1);
+        			grid[8-1-i][j-start] = new Piece(Piece.Role.R2);
+        	}
         }
-
-        for (int i = grid.length-1; i >=mid+1 ; i--) {
-            if(i%2==0){
-                for (int j = 0; j < grid.length; j++) {
-                    if (j % 2 == 1) {
-                        grid[i][j] = new Piece(Piece.Role.R2);
-                    }
-                }
-                }
-            else {
-                for (int j = 0; j < grid.length; j++) {
-                    if (j % 2 == 0) {
-                        grid[i][j] = new Piece(Piece.Role.R2);
-                    }
-                }
-            }
-            }
     }
 
     public Moveset genMoves(int[] cell){
