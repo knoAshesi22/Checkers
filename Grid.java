@@ -111,6 +111,7 @@ public class Grid {
 		    else if(!isOccupied(x-1,y+1)){
                         moveset.add(x-1,y+1); //add upper-left movement
                     }
+		    // in case of jumps, the (x+1,y+1) or (x-1,y+1) positions should be occupied with player 2's piece. how can i implement that?
                     else if(!isOccupied(x+2,y+2)){
                         moveset.add(x+2,y+2); //add upper-right jump
                     }
@@ -126,6 +127,7 @@ public class Grid {
                     else if (!isOccupied(x-1,y-1)){
                         moveset.add(x-1,y-1); // add lower-left movement
                     }
+		    // in case of jumps, the (x+1,y-1) or (x-1,y-1) positions should be occupied with player 1's piece. how can i implement that?
 		    else if(!isOccupied(x+2,y-2)){
                         moveset.add(x+2,y-2); //add lower-right jump
                     }
