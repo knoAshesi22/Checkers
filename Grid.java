@@ -116,8 +116,32 @@ public class Grid {
         /4. Should check if tile has a pawn or king.
         /5. Should generate possible jumps
          */
+        if (Grid.isOccupied()){
+            if (Piece.getRank() == PAWN){ 
+                if (Piece.getRole() == R1){ 
+                    if (grid[x+1][y+1]==null){ 
+                        grid[x+1][y+1] = grid[x][y]; // Player 1 moves right-up diagonal
+                        grid[x][y] = null; // original cell is emptied out
+                    }
+                    else if (grid[x-1][y+1] == null){
+                        grid[x-1][y+1] = grid[x][y]; // Player 1 moves left-up diagonal
+                        grid[x][y] = null;
+                    }
+                }
+                else if (Piece.getRole() == R2){
+                    if (grid[x+1][y-1] == null){
+                        grid[x+1][y-1] = grid[x][y]; // Player 1 moves right-down diagonal
+                        grid[x][y] = null;
+                    }
+                    else if (grid[x-1][y-1] == null){
+                        grid[x-1][y-1] = grid[x][y]; // Player 1 moves left-down diagonal
+                        grid[x][y] = null;
+                    } 
+                }
+            }
+        }
         return new int[0][0];
-    }
+}
 
 
     public boolean isOccupied(int x, int y){
