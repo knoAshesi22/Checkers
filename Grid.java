@@ -6,6 +6,57 @@ public class Grid {
     private Piece[][] grid;
     private final int DEFAULT_SIZE=8;
 
+    private class Moveset{
+
+        int[][] moveset;
+        int index;
+        private final int DSIZE=4;
+
+        public Moveset(){
+            moveset=new int[DSIZE][2];
+            index=0;
+        }
+
+        public void add(int x,int y){
+            if(index>=moveset.length){
+                expand();
+            }
+            moveset[index]=new int[]{x,y};
+            index++;
+        }
+
+        private void expand(){
+            int[][] temp=new int[moveset.length+1][];
+            for (int i = 0; i <moveset.length ; i++) {
+                temp[i]=moveset[i];
+            }
+            moveset=temp;
+        }
+
+        public void remove(int index){
+            moveset[index]=null;
+            for (int i = index; i <moveset.length-1 ; i++) {
+                moveset[i]=moveset[i+1];
+            }
+
+            int[][] temp=new int[moveset.length][];
+            for (int i = 0; i <moveset.length ; i++) {
+                temp[i]=moveset[i];
+            }
+            moveset=temp;
+
+        }
+
+        public int[] getMove(int index){
+            return moveset[index];
+        }
+
+        public int getLength(){
+            return moveset.length;
+        }
+
+    }
+
     //Constructors
     public Grid(){
         grid=new Piece[DEFAULT_SIZE][DEFAULT_SIZE];
@@ -77,6 +128,31 @@ public class Grid {
             return true;
         }
         return false;
+    }
+
+    public boolean isJump(int[] origin, int[] dest){
+        /*
+        /Checks if a move is a jump or not
+         */
+        int xd=Math.abs((dest[0]-origin[0]));
+        int yd=Math.abs((dest[1]-origin[1]));
+        if(xd==2||yd==2){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isInGrid(int[] cell){
+        /*
+        /Checks if a cell/coordinate is in the grid/board
+         */
+        if (cell[0]<0||cell[0]>=grid.length){
+            return false;
+        }
+        if (cell[1]<0||cell[1]>=grid.length){
+            return false;
+        }
+        return true;
     }
 
     public void movePiece(int[] origin, int[] dest){

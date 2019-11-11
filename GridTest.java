@@ -9,11 +9,11 @@ public class GridTest {
 //        tgrid.printGrid();
 
         Grid cgrid=new Grid(10);
-//        cgrid.printOccupied();
+        cgrid.printOccupied();
         cgrid.printPieces();
         System.out.println();
         cgrid.setGrid();
-//        cgrid.printOccupied();
+        cgrid.printOccupied();
         cgrid.printPieces();
 
 
