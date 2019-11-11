@@ -1,4 +1,5 @@
 package Checkers;
+import Checkers.Piece.*;
 
 
 public class Grid {
@@ -10,7 +11,7 @@ public class Grid {
 
         int[][] moveset;
         int index;
-        private final int DSIZE=4;
+        private final int DSIZE=0;
 
         public Moveset(){
             moveset=new int[DSIZE][2];
@@ -106,7 +107,7 @@ public class Grid {
             }
     }
 
-    public int[][] genMoves(int[] cell){
+    public Moveset genMoves(int[] cell){
         /*
         /Generates a list of possible moves from a given tile
         /Conditions for method:
@@ -116,19 +117,24 @@ public class Grid {
         /4. Should check if tile has a pawn or king.
         /5. Should generate possible jumps
          */
-        if (Grid.isOccupied()){
-            if (Piece.getRank() == PAWN){ 
-                if (Piece.getRole() == R1){ 
-                    if (grid[x+1][y+1]==null){ 
-                        grid[x+1][y+1] = grid[x][y]; // Player 1 moves right-up diagonal
-                        grid[x][y] = null; // original cell is emptied out
+
+        Moveset moveset=new Moveset();
+
+        if (isOccupied(cell[0],cell[1])){
+
+            int x=cell[0];
+            int y=cell[1];
+            Piece piece=grid[x][y];
+            if (piece.getRank() == Rank.PAWN){
+                if (piece.getRole() == Role.R1){
+                    if(!isOccupied(x+1,y+1)){
+                        moveset.add(x+1,y+1);//add right-up movement
                     }
-                    else if (grid[x-1][y+1] == null){
-                        grid[x-1][y+1] = grid[x][y]; // Player 1 moves left-up diagonal
-                        grid[x][y] = null;
+                    else if(!(isOccupied(x+2,y+2))){
+                        moveset.add(x+2,y+2); //add upper-right jump
                     }
                 }
-                else if (Piece.getRole() == R2){
+                else if (piece.getRole() == Role.R2){
                     if (grid[x+1][y-1] == null){
                         grid[x+1][y-1] = grid[x][y]; // Player 1 moves right-down diagonal
                         grid[x][y] = null;
@@ -136,12 +142,12 @@ public class Grid {
                     else if (grid[x-1][y-1] == null){
                         grid[x-1][y-1] = grid[x][y]; // Player 1 moves left-down diagonal
                         grid[x][y] = null;
-                    } 
+                    }
                 }
             }
         }
-        return new int[0][0];
-}
+        return moveset;
+    }
 
 
     public boolean isOccupied(int x, int y){
