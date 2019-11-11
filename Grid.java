@@ -105,33 +105,32 @@ public class Grid {
             Piece piece=grid[x][y];
             if (piece.getRank() == Rank.PAWN){
                 if (piece.getRole() == Role.R1){
-                    if(!isOccupied(x+1,y+1)){
+                    if(isInGrid(x+1,y+1) && !isOccupied(x+1,y+1)){
                         moveset.add(x+1,y+1); //add upper-right movement
                     }
-		    else if(!isOccupied(x-1,y+1)){
-                        moveset.add(x-1,y+1); //add upper-left movement
-                    }
-		    // in case of jumps, the (x+1,y+1) or (x-1,y+1) positions should be occupied with player 2's piece. how can i implement that?
-                    else if(!isOccupied(x+2,y+2)){
+		    else if(isInGrid(x+2,y+2) && !isOccupied(x+2,y+2)){
                         moveset.add(x+2,y+2); //add upper-right jump
                     }
-		    else if(!isOccupied(x-2,y+2)){
+		    else if(isInGrid(x-1,y+1) && !isOccupied(x-1,y+1)){
+                        moveset.add(x-1,y+1); //add upper-left movement
+                    }
+	
+		    else if(isInGrid(x-2,y+2) && !isOccupied(x-2,y+2)){
                         moveset.add(x-2,y+2); //add upper-left jump
                     }
                 }
 		    
                 else if (piece.getRole() == Role.R2){
-                    if (!isOccupied(x+1,y-1)){
+                    if (isInGrid(x+1,y-1) && !isOccupied(x+1,y-1)){
                         moveset.add(x+1,y-1); // add lower-right movement
                     }
-                    else if (!isOccupied(x-1,y-1)){
-                        moveset.add(x-1,y-1); // add lower-left movement
-                    }
-		    // in case of jumps, the (x+1,y-1) or (x-1,y-1) positions should be occupied with player 1's piece. how can i implement that?
-		    else if(!isOccupied(x+2,y-2)){
+		    else if(isInGrid(x+2,y-2) && !isOccupied(x+2,y-2)){
                         moveset.add(x+2,y-2); //add lower-right jump
                     }
-		    else if(!isOccupied(x-2,y-2)){
+                    else if (isInGrid(x-1,y-1) && !isOccupied(x-1,y-1)){
+                        moveset.add(x-1,y-1); // add lower-left movement
+                    }
+		    else if(isInGrid(x-2,y-2) && !isOccupied(x-2,y-2)){
                         moveset.add(x-2,y-2); //add lower-left jump
                     }
                 }
