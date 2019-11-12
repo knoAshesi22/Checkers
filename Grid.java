@@ -69,6 +69,14 @@ public class Grid {
 
     }
 
+    public void addPiece(Piece piece,int[] coord){
+        int x=coord[0];
+        int y=coord[1];
+        if(!isOccupied(x,y)){
+
+        }
+    }
+
     public void setGrid(){
         int mid=grid.length/2;
 
@@ -180,6 +188,19 @@ public class Grid {
             return false;
         }
         if (cell[1]<0||cell[1]>=grid.length){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isInGrid(int x,int y){
+        /*
+        /Checks if a cell/coordinate is in the grid/board
+         */
+        if (x<0||x>=grid.length){
+            return false;
+        }
+        if (y<0||y>=grid.length){
             return false;
         }
         return true;
