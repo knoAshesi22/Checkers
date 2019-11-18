@@ -1,6 +1,8 @@
 package Checkers;
 import Checkers.Piece.*;
 
+import java.util.Arrays;
+
 
 public class Grid {
 
@@ -61,6 +63,12 @@ public class Grid {
             return moveset.length;
         }
 
+        @Override
+        public String toString() {
+            return "Moveset{" +
+                    "moveset=" + Arrays.deepToString(moveset) +
+                    '}';
+        }
     }
 
     //Constructors
@@ -99,7 +107,8 @@ public class Grid {
     public void addPiece(Piece piece, int[] coord){
         int x=coord[0];
         int y=coord[1];
-        if(!isOccupied(x,y)){
+        if(!isOccupied(x,y) && isBlackCell(x,y))
+        {
             grid[x][y]=piece;
             if(piece.getRole()==Role.R1){
                 if(piece.getRank()==Rank.KING){
@@ -144,6 +153,19 @@ public class Grid {
         }
     }
 
+    public boolean isBlackCell(int x, int y){
+        /*
+        /Returns if a cell with coordinate (x,y) is a black tile on the board.
+         */
+            if(!isInGrid(x,y)){
+                return false;
+            }
+            if((x+y)%2==0){
+                return true;
+            }
+            return false;
+    }
+
     public Moveset genMoves(int[] cell){
         /*
         /Generates a list of possible moves from a given tile
@@ -164,24 +186,39 @@ public class Grid {
             Piece piece=grid[x][y];
             if (piece.getRank() == Rank.PAWN){
                 if (piece.getRole() == Role.R1){
+
                     if(isInGrid(x+1,y+1) && !isOccupied(x+1,y+1)){
                         moveset.add(x+1,y+1); //add upper-right movement
                     }
-		    else if(isInGrid(x+2,y+2) && !isOccupied(x+2,y+2)){
-			Piece p2 = grid[x+1][y+1];
-			if (p2.getRole() == Role.R2){
-                            moveset.add(x+2,y+2); //add upper-right jump
-			}
+		            else if(isInGrid(x+2,y+2) && !isOccupied(x+2,y+2)){
+		                Piece p2 = grid[x+1][y+1];
+                        if (p2.getRole() == Role.R2){
+                                moveset.add(x+2,y+2); //add upper-right jump
+                        }
                     }
-		    if(isInGrid(x-1,y+1) && !isOccupied(x-1,y+1)){
+
+//		            if(isInGrid(x+1,y+1)){
+//		                if(!isOccupied(x+1,y+1)){
+//                            moveset.add(x+1,y+1); //add upper-right movement
+//                        }
+//                        else if(isInGrid(x+2,y+2) && !isOccupied(x+2,y+2)){
+//                            Piece p2 = grid[x+1][y+1];
+//                            if (p2.getRole() == Role.R2){
+//                                moveset.add(x+2,y+2); //add upper-right jump
+//                            }
+//                        }
+//                    }
+
+
+
+                    if(isInGrid(x-1,y+1) && !isOccupied(x-1,y+1)){
                         moveset.add(x-1,y+1); //add upper-left movement
                     }
-	
-		    else if(isInGrid(x-2,y+2) && !isOccupied(x-2,y+2)){
+		            else if(isInGrid(x-2,y+2) && !isOccupied(x-2,y+2)){
                         Piece p2 = grid[x-1][y+1];
-			if (p2.getRole() == Role.R2){
-                            moveset.add(x-2,y+2); //add upper-left jump
-			}
+                        if (p2.getRole() == Role.R2){
+                                moveset.add(x-2,y+2); //add upper-left jump
+                        }
                     }
                 }
 		    
@@ -189,20 +226,21 @@ public class Grid {
                     if (isInGrid(x+1,y-1) && !isOccupied(x+1,y-1)){
                         moveset.add(x+1,y-1); // add lower-right movement
                     }
-		    else if(isInGrid(x+2,y-2) && !isOccupied(x+2,y-2)){
+		            else if(isInGrid(x+2,y-2) && !isOccupied(x+2,y-2)){
                         Piece p1 = grid[x+1][y-1];
-			if (p1.getRole() == Role.R1){
-                            moveset.add(x+2,y-2); //add lower-right jump
-			}
+                        if (p1.getRole() == Role.R1){
+                                        moveset.add(x+2,y-2); //add lower-right jump
+                        }
                     }
+
                     if (isInGrid(x-1,y-1) && !isOccupied(x-1,y-1)){
                         moveset.add(x-1,y-1); // add lower-left movement
                     }
-		    else if(isInGrid(x-2,y-2) && !isOccupied(x-2,y-2)){
+		            else if(isInGrid(x-2,y-2) && !isOccupied(x-2,y-2)){
                         Piece p1 = grid[x-1][y-1];
-			if (p1.getRole() == Role.R1){
-                            moveset.add(x-2,y-2); //add upper-right jump
-			}
+                        if (p1.getRole() == Role.R1){
+                                        moveset.add(x-2,y-2); //add upper-right jump
+                        }
                     }
                 }
             }
@@ -237,9 +275,22 @@ public class Grid {
         return grid.length;
     }
 
-    public void getNumPieces(){
-
+    public int getNumPieces(){
+        int total=getNumP1_kings()+getNumP1_pawns()+getNumP2_kings()+getNumP2_pawns();
+        return total;
     }
+
+    public int getNumP1Pieces(){
+        int p1pieces=getNumP1_kings()+getNumP1_pawns();
+        return p1pieces;
+    }
+
+    public int getNumP2Pieces(){
+        int p2pieces=getNumP2_kings()+getNumP2_pawns();
+        return p2pieces;
+    }
+
+
 
 
     public boolean isInGrid(int x,int y){
