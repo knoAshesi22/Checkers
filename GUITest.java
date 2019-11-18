@@ -15,8 +15,10 @@ public class GUITest extends Application {
         Scene scene=new Scene(board.getPane(),bSize,bSize);
         primaryStage.setTitle("Board");
         primaryStage.setScene(scene);
+//        primaryStage.setResizable(false);
         primaryStage.show();
 //        scene.getHeight();
+//        primaryStage.getHeight();
 
     }
 
