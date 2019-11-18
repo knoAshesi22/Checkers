@@ -9,10 +9,12 @@ public class BoardView extends JPanel implements MouseListener, MouseMotionListe
 
     private int bHeight;
     private int bWidth;
+    private enum Color{BLACK,WHITE};
 
     public BoardView(int bHeight, int bWidth){
         this.bHeight=bHeight;
         this.bWidth=bWidth;
+        JFrame boardFrame=new JFrame("Checkers");
 
     }
 
@@ -21,7 +23,7 @@ public class BoardView extends JPanel implements MouseListener, MouseMotionListe
 
     }
 
-    public static void colorBoard(){
+    public static void colorTIle(Color color){
 
     }
     @Override

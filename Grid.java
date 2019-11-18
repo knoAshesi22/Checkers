@@ -5,9 +5,14 @@ import Checkers.Piece.*;
 public class Grid {
 
     private Piece[][] grid;
-    private final int DEFAULT_SIZE=8;
+    private static final int DEFAULT_SIZE=8;
 
-    private class Moveset{
+    private int numP1_pawns;
+    private int numP1_kings;
+    private int numP2_pawns;
+    private int numP2_kings;
+
+    class Moveset{
 
         int[][] moveset;
         int index;
@@ -59,22 +64,65 @@ public class Grid {
     }
 
     //Constructors
-    public Grid(){
-        grid=new Piece[DEFAULT_SIZE][DEFAULT_SIZE];
-
-    }
 
     public Grid(int size){
         grid=new Piece[size][size];
+        numP1_pawns=0;
+        numP1_kings=0;
+        numP2_pawns=0;
+        numP2_kings=0;
 
     }
 
-    public void addPiece(Piece piece,int[] coord){
+    public Grid(){
+        this(DEFAULT_SIZE);
+    }
+
+
+    //Accessor methods for number of pieces on the board
+    public int getNumP1_pawns() {
+        return numP1_pawns;
+    }
+
+    public int getNumP1_kings() {
+        return numP1_kings;
+    }
+
+    public int getNumP2_pawns() {
+        return numP2_pawns;
+    }
+
+    public int getNumP2_kings() {
+        return numP2_kings;
+    }
+
+    public void addPiece(Piece piece, int[] coord){
         int x=coord[0];
         int y=coord[1];
         if(!isOccupied(x,y)){
-
+            grid[x][y]=piece;
+            if(piece.getRole()==Role.R1){
+                if(piece.getRank()==Rank.KING){
+                    numP1_kings++;
+                }
+                else {
+                    numP1_pawns++;
+                }
+            }
+            else{
+                if(piece.getRank()==Rank.KING){
+                    numP2_kings++;
+                }
+                else {
+                    numP2_pawns++;
+                }
+            }
         }
+    }
+
+    public void addPiece(int[] coord){
+        Piece piece=new Piece(Role.R1);
+        addPiece(piece,coord);
     }
 
     public void setGrid(){
@@ -88,8 +136,11 @@ public class Grid {
         	}
         	for (int j = start; j <grid.length; j=j+2) {
         			grid[i][j] = new Piece(Piece.Role.R1);
-        			grid[8-1-i][j-start] = new Piece(Piece.Role.R2);
+        			grid[grid.length-1-i][j-start] = new Piece(Piece.Role.R2);
+        			numP1_pawns++;
+        			numP2_pawns++;
         	}
+
         }
     }
 
@@ -182,18 +233,14 @@ public class Grid {
         return false;
     }
 
-    public boolean isInGrid(int[] cell){
-        /*
-        /Checks if a cell/coordinate is in the grid/board
-         */
-        if (cell[0]<0||cell[0]>=grid.length){
-            return false;
-        }
-        if (cell[1]<0||cell[1]>=grid.length){
-            return false;
-        }
-        return true;
+    public int getSize(){
+        return grid.length;
     }
+
+    public void getNumPieces(){
+
+    }
+
 
     public boolean isInGrid(int x,int y){
         /*
@@ -233,7 +280,7 @@ public class Grid {
 
     }
 
-    public void remove(int[] coord){
+    public void removePiece(int[] coord){
         grid[coord[0]][coord[1]]=null;
     }
 
