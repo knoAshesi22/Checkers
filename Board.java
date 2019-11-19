@@ -63,7 +63,30 @@ public class Board {
         this(8,0,bsize);
 
     }
+    private void setBoard()
+    {
+        for (int row = 0; row < grid.length; row++) {
+            int i1=0;
+            if(row%2==0){
+                i1=1;
+            for (int col = 0; col < grid.length; col++) {
+                Rectangle tile=drawTile(i1);
+                GridPane.setRowIndex(tile, row);
+                GridPane.setColumnIndex(tile, col);
 
+                //Generate piece graphic
+                if (grid[row][col]!=null){
+                    Circle piece=drawPiece();
+                    GridPane.setRowIndex(piece,row);
+                    GridPane.setColumnIndex(piece,col);
+
+                    //Add tiles and pieces to board graphic
+                    pane.getChildren().addAll(tile);
+                }
+                pane.getChildren().addAll(piece);
+                i1=(i1+1)%2;
+                
+    }
     private void setBoard(Color[] colorchoice){
         /*
         /Creates a board graphic of given color scheme, with corresponding pieces in their position
