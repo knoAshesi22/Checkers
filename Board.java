@@ -52,7 +52,7 @@ public class Board {
         pane=new GridPane();
 //        pane.getColumnConstraints().add(new ColumnConstraints(numTiles));
 //        pane.getRowConstraints().add(new RowConstraints(numTiles));
-        setBoard(this.colorchoice);
+        setBoard2(this.colorchoice);
     }
 
     public Board(){
@@ -63,30 +63,71 @@ public class Board {
         this(8,0,bsize);
 
     }
-    private void setBoard2()
-    {
-        for (int row = 0; row < grid.length; row++) {
+
+    private void setBoard2(Color[] colorchoice){
+        for (int row = 0; row <rNum ; row++) {
+
             int i1=0;
-            if(row%2==0){
+            if ((row%2)==0){
                 i1=1;
-            for (int col = 0; col < grid.length; col++) {
+            }
+            for (int col = 0; col <cNum ; col++) {
                 Rectangle tile=drawTile(i1);
                 GridPane.setRowIndex(tile, row);
                 GridPane.setColumnIndex(tile, col);
+                pane.getChildren().addAll(tile);
 
                 //Generate piece graphic
-                if (grid[row][col]!=null){
-                    Circle piece=drawPiece();
+//                System.out.println(grid.isOccupied(row,col));
+                if (grid.isOccupied(row,col)){
+                    Piece tp=grid.getPiece(row,col);
+                    Color pcolor;
+                    if(tp.getRole()== Piece.Role.R1){
+                        pcolor=Color.RED;
+                    }
+                    else{
+                        pcolor=Color.GREEN;
+                    }
+                    Circle piece=drawPiece(pcolor);
                     GridPane.setRowIndex(piece,row);
                     GridPane.setColumnIndex(piece,col);
 
                     //Add tiles and pieces to board graphic
-                    pane.getChildren().addAll(tile);
+                    pane.getChildren().addAll(piece);
                 }
-                pane.getChildren().addAll(piece);
+
+
                 i1=(i1+1)%2;
-                
+            }
+        }
+
     }
+//    private void setBoard2()
+//    {
+//        for (int row = 0; row < grid.length; row++) {
+//
+//
+//            int i1=0;
+//            if(row%2==0){
+//                i1=1;
+//            for (int col = 0; col < grid.length; col++) {
+//                Rectangle tile=drawTile(i1);
+//                GridPane.setRowIndex(tile, row);
+//                GridPane.setColumnIndex(tile, col);
+//
+//                //Generate piece graphic
+//                if (this.grid[row][col]!=null){
+//                    Circle piece=drawPiece();
+//                    GridPane.setRowIndex(piece,row);
+//                    GridPane.setColumnIndex(piece,col);
+//
+//                    //Add tiles and pieces to board graphic
+//                    pane.getChildren().addAll(tile);
+//                }
+//                pane.getChildren().addAll(piece);
+//                i1=(i1+1)%2;
+//
+//    }
     private void setBoard(Color[] colorchoice){
         /*
         /Creates a board graphic of given color scheme, with corresponding pieces in their position
