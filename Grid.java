@@ -145,12 +145,22 @@ public class Grid {
         	}
         	for (int j = start; j <grid.length; j=j+2) {
         			grid[i][j] = new Piece(Piece.Role.R1);
-        			grid[grid.length-1-i][j-start] = new Piece(Piece.Role.R2);
+        			int a=grid.length-1-i;
+        			int b=j-start;
+//                System.out.printf("%s\t%s\n",grid.length-1-i,j);
+        			grid[grid.length-1-i][(j+1)%grid.length] = new Piece(Piece.Role.R2);
         			numP1_pawns++;
         			numP2_pawns++;
         	}
 
         }
+    }
+
+    public Piece getPiece(int x, int y){
+        if(isOccupied(x,y)){
+            return grid[x][y];
+        }
+        return null;
     }
 
     public boolean isBlackCell(int x, int y){
@@ -341,12 +351,20 @@ public class Grid {
          */
         for (int i = 0; i <grid.length ; i++) {
             for (int j = 0; j <grid.length ; j++) {
-                if (grid[i][j]==null){
+                if(!isOccupied(i,j)){
                     System.out.print(false+" ");
+                    continue;
                 }
                 else{
                     System.out.print(true+" ");
+                    continue;
                 }
+//                if (grid[i][j]==null){
+//                    System.out.print(false+" ");
+//                }
+//                else{
+//                    System.out.print(true+" ");
+//                }
             }
             System.out.println("");
         }
