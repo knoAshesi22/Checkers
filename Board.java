@@ -63,7 +63,7 @@ public class Board {
         this(8,0,bsize);
 
     }
-    private void setBoard()
+    private void setBoard2()
     {
         for (int row = 0; row < grid.length; row++) {
             int i1=0;
@@ -140,7 +140,7 @@ public class Board {
 
     public Circle drawPiece(){
         Circle piece=new Circle();
-        double radius=tileSize/2.0;
+        double radius=tileSize/2.5;
         piece.setRadius(radius);
         piece.setFill(Color.RED);
         return piece;
