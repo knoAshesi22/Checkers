@@ -2,10 +2,10 @@ package Checkers;
 import Checkers.Piece;
 import Checkers.Grid;
 
-public class MoveTree {
+public class DecisionTree {
     Grid.Moveset moveset;
 
-    public MoveTree(Grid.Moveset moveset){
+    public DecisionTree(Grid.Moveset moveset){
         this.moveset=moveset;
     }
 

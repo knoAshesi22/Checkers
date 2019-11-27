@@ -8,10 +8,12 @@ public class Piece {
 
     private Role role;
     private Rank rank;
+    private boolean isHighlighted;
 
     public Piece(Role role){
         this.role=role;
         this.rank=Rank.PAWN;
+        this.isHighlighted=false;
     }
 
     public Piece(Role role, Rank rank) {
@@ -23,11 +25,19 @@ public class Piece {
         return role;
     }
 
+    public boolean isHighlighted() {
+        return isHighlighted;
+    }
+
     public Rank getRank() {
         return rank;
     }
 
     public void promote(){
         rank=Rank.KING;
+    }
+
+    public void setHighlighted(){
+        this.isHighlighted=!isHighlighted;
     }
 }

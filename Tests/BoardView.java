@@ -1,4 +1,4 @@
-package Checkers;
+package Checkers.Tests;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
