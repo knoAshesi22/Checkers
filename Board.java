@@ -57,8 +57,7 @@ public class Board {
 
 
 
-    //PLACE TO CONCENTRATE ON
-    //
+
 
     public Board(int numTiles, int colorchoice, int bsize){
 
@@ -91,6 +90,32 @@ public class Board {
 
     }
 
+    //PLACE TO CONCENTRATE ON
+    //
+    public void checkIfGameEnded(){
+        return;
+    }
+
+    public void automaticPlay(){
+        return;
+    }
+
+    private void showJumps(int[][] jumps){
+        for (int[] jump:jumps) {
+            int bRow=rNum-1-jump[0];
+            Rectangle chosen=getTile(bRow,jump[1]);
+            chosen.setFill(Color.CYAN);
+        }
+//        int bRow=rNum-1-row;
+//        Rectangle chosen=getTile(bRow,col);
+//        chosen.setFill(Color.CYAN);
+    }
+
+
+
+    //
+    //PLACE TO CONCENTRATE ON
+
     public void movePiece(int[] origin, int[] dest){
 
         Circle piece=getPiece(origin[0],origin[1]);
@@ -107,9 +132,7 @@ public class Board {
 
     }
 
-    public void checkIfGameEnded(){
-        return;
-    }
+
 
     public void removePiece(int[] cell){
         grid.removePiece(cell);
@@ -289,16 +312,7 @@ public class Board {
         chosen.setFill(Color.CYAN);
     }
 
-    private void showJumps(int[][] jumps){
-        for (int[] jump:jumps) {
-            int bRow=rNum-1-jump[0];
-            Rectangle chosen=getTile(bRow,jump[1]);
-            chosen.setFill(Color.CYAN);
-        }
-//        int bRow=rNum-1-row;
-//        Rectangle chosen=getTile(bRow,col);
-//        chosen.setFill(Color.CYAN);
-    }
+
 
 
 
@@ -340,8 +354,7 @@ public class Board {
     }
 
 
-    //
-    //PLACE TO CONCENTRATE ON
+
 
 
 
@@ -481,7 +494,7 @@ public class Board {
                     return;
                 }
                 oClick=cell;
-                highlightTile(oClick[0],oClick[1]);
+//                highlightTile(oClick[0],oClick[1]);
                 turnBlue(oClick[0],oClick[1]);
                 showMoves(oClick);
 
