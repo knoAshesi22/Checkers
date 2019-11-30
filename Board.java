@@ -578,6 +578,7 @@ public class Board {
                 movePiecev4(oClick,dClick);
                 oClick=dClick=null;
                 p1Turn=!p1Turn;
+                if (checkIfGameEnded()){playerWin();}
                 return;
             }
 
