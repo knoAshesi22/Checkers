@@ -92,8 +92,30 @@ public class Board {
 
     //PLACE TO CONCENTRATE ON
     //
-    public void checkIfGameEnded(){
-        return;
+    public boolean checkIfGameEnded(){
+        if (p1Turn){
+            if (grid.getNumP1Pieces()==0 || grid.getNumP2Pieces()==0){
+                return true;
+            }
+            else if(getNumPieces()<=3){
+                return true;
+            }
+            return false;
+        }
+    }
+    
+    public void playerWin(){
+        if(grid.getNumP1Pieces()==0){
+            System.out.print("PLAYER 2 IS THE WINNER!!!");
+        }
+        
+        else if(grid.getNumP2Pieces()==0){
+            System.out.print("PLAYER 1 IS THE WINNER!!!");
+        }
+        
+        else if(grid.getNumPieces()<=3){
+            System.out.print("IT'S A DRAW!!!");
+        }
     }
 
     public void automaticPlay(){
