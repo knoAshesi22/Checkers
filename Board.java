@@ -92,8 +92,8 @@ public class Board {
 
     //PLACE TO CONCENTRATE ON
     //
-    public boolean checkIfGameEnded(){
-        return false;
+    public void checkIfGameEnded(){
+        return;
     }
 
     public void automaticPlay(){
@@ -471,8 +471,6 @@ public class Board {
         int row=cell[0];int col=cell[1];
         int bRow=rNum-1-row;
         Piece sPiece;
-
-        // Current Player/Turn
         Piece.Role cRole;
 
         if(p1Turn){
@@ -482,14 +480,13 @@ public class Board {
             cRole= Piece.Role.R2;
         }
 
-//        if(false){
-//            return;
-//        }
+        if(false){
+            return;
+        }
 
         if(!grid.isBlackCell(row,col)){
             return;
         }
-
         if(oClick==null){
             sPiece=grid.getPiece(row,col);
             if(sPiece!=null){
